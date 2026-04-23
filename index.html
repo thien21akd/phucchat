@@ -1,161 +1,465 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lumière — Online Art Gallery</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<title>Hexaaquacopper(II) — [Cu(H₂O)₆]²⁺</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
   <style>
     :root {
-  --cream: #F9F5EF;
-  --parchment: #F0E9DC;
-  --gold: #C9A96E;
-  --gold-light: #E8D5B0;
-  --gold-dark: #8B6F3E;
-  --charcoal: #2A2520;
-  --warm-gray: #6B635A;
-  --soft-gray: #9E9590;
-  --white: #FEFCF9;
-}
+      --bg: #F4F1EC;
+      --surface: #FDFBF8;
+      --border: rgba(60,80,100,0.13);
+      --copper: #B87333;
+      --copper-light: #D4956A;
+      --copper-pale: #F0DDD0;
+      --blue-dark: #1A3A5C;
+      --blue-mid: #2E5B8A;
+      --blue-soft: #4A7FB5;
+      --blue-pale: #D6E8F5;
+      --text: #1C2B3A;
+      --muted: #5A6A7A;
+      --faint: #8A9BAC;
+      --mono: 'DM Mono', monospace;
+    }
 
-body {
-  margin: 0;
-  font-family: 'Jost', sans-serif;
-  background: var(--cream);
-  color: var(--charcoal);
-}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 52px;
+      background: var(--blue-dark);
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+      gap: 2rem;
+      z-index: 100;
+      border-bottom: 2px solid var(--copper);
+    }
+
+    .topbar-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: #fff;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .topbar-logo span {
+      color: var(--copper-light);
+    }
+
+    .topbar-divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .topbar-tabs {
+      display: flex;
+      gap: 0.1rem;
+      list-style: none;
+    }
+
+    .topbar-tabs li a {
+      display: block;
+      padding: 0.2rem 0.8rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      text-transform: uppercase;
+      border-radius: 3px;
+      transition: color 0.2s;
+    }
+
+    .topbar-tabs li.active a,
+    .topbar-tabs li a:hover {
+      color: var(--copper-light);
+    }
+
+    /* ── PAGE ── */
     .wiki-page {
-  padding: 7rem 5rem 5rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+      padding: 5.5rem 2rem 5rem;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
 
-.wiki-header {
-  margin-bottom: 2.5rem;
-  border-bottom: 1px solid rgba(42, 37, 32, 0.15);
-  padding-bottom: 1.5rem;
-}
+    /* ── HEADER ── */
+    .wiki-header {
+      margin-bottom: 2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border);
+    }
 
-.wiki-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 4rem;
-  font-weight: 400;
-  line-height: 1.1;
-}
+    .formula-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--blue-dark);
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.75rem;
+      border-radius: 3px;
+      margin-bottom: 0.9rem;
+      border-left: 3px solid var(--copper);
+    }
 
-.wiki-subtitle {
-  font-size: 1rem;
-  color: var(--warm-gray);
-  margin-top: 0.6rem;
-}
+    .formula-badge .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--copper-light);
+      display: inline-block;
+    }
 
-.wiki-layout {
-  display: grid;
-  grid-template-columns: 1.8fr 1fr;
-  gap: 3rem;
-  align-items: start;
-}
+    .wiki-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--blue-dark);
+    }
 
-.wiki-lead {
-  font-size: 1.05rem;
-  color: var(--warm-gray);
-  line-height: 1.9;
-  margin-bottom: 2rem;
-}
+    .wiki-title sub {
+      font-size: 0.6em;
+    }
 
-.wiki-article p {
-  font-size: 1rem;
-  color: var(--charcoal);
-  line-height: 1.9;
-  margin-bottom: 1.3rem;
-}
+    .wiki-title sup {
+      font-size: 0.55em;
+    }
 
-.wiki-section-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.9rem;
-  font-weight: 500;
-  margin-top: 2.2rem;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid rgba(42, 37, 32, 0.12);
-  padding-bottom: 0.5rem;
-}
+    .wiki-subtitle {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
 
-.wiki-infobox {
-  background: rgba(255,255,255,0.6);
-  border: 1px solid rgba(42, 37, 32, 0.12);
-  padding: 1.2rem;
-  border-radius: 8px;
-  position: sticky;
-  top: 120px;
-}
+    /* ── LAYOUT ── */
+    .wiki-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 2.5rem;
+      align-items: start;
+    }
 
-.infobox-img {
-  width: 100%;
-  border-radius: 6px;
-  display: block;
-  margin-bottom: 0.8rem;
-}
+    /* ── ARTICLE ── */
+    .wiki-lead {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: var(--text);
+      margin-bottom: 1.8rem;
+      padding: 1.1rem 1.3rem;
+      background: var(--blue-pale);
+      border-left: 3px solid var(--blue-soft);
+      border-radius: 0 6px 6px 0;
+    }
 
-.infobox-caption {
-  font-size: 0.85rem;
-  color: var(--warm-gray);
-  text-align: center;
-  margin-bottom: 1.2rem;
-  font-style: italic;
-}
+    .wiki-lead strong {
+      color: var(--blue-dark);
+    }
 
-.infobox-table {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-}
+    .wiki-article p {
+      font-size: 0.975rem;
+      line-height: 1.9;
+      margin-bottom: 1.2rem;
+      color: var(--text);
+    }
 
-.infobox-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  border-bottom: 1px solid rgba(42, 37, 32, 0.08);
-  padding-bottom: 0.7rem;
-}
+    .wiki-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      font-weight: 500;
+      color: var(--blue-dark);
+      margin-top: 2.2rem;
+      margin-bottom: 0.9rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
 
-.infobox-key {
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--soft-gray);
-  min-width: 110px;
-}
+    .wiki-section-title .section-num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--copper);
+      letter-spacing: 0.1em;
+      background: var(--copper-pale);
+      padding: 0.15rem 0.45rem;
+      border-radius: 3px;
+    }
 
-.infobox-value {
-  font-size: 0.95rem;
-  color: var(--charcoal);
-  text-align: right;
-  font-weight: 500;
-}
+    /* ── APP TABLE ── */
+    .app-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 1.5rem;
+      font-size: 0.9rem;
+    }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .wiki-layout {
-    grid-template-columns: 1fr;
-  }
+    .app-table thead tr {
+      background: var(--blue-dark);
+      color: #fff;
+    }
 
-  .wiki-infobox {
-    position: relative;
-    top: unset;
-  }
+    .app-table thead th {
+      padding: 0.6rem 1rem;
+      text-align: left;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      font-weight: 400;
+    }
 
-  .wiki-page {
-    padding: 7rem 2rem 4rem;
-  }
-}
+    .app-table tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .app-table tbody tr:hover {
+      background: rgba(74,127,181,0.06);
+    }
+
+    .app-table tbody td {
+      padding: 0.7rem 1rem;
+      vertical-align: top;
+    }
+
+    .app-table td:first-child {
+      font-weight: 500;
+      color: var(--blue-mid);
+      white-space: nowrap;
+    }
+
+    .tag-pill {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      padding: 0.12rem 0.5rem;
+      border-radius: 20px;
+      margin-right: 0.3rem;
+    }
+
+    .tag-analytical { background: #D6EAF8; color: #1A5276; }
+    .tag-industrial { background: #D5F5E3; color: #1D6A39; }
+    .tag-agri       { background: #FEF9E7; color: #7D6608; }
+    .tag-synth      { background: #F5EEF8; color: #6C3483; }
+
+    /* ── STRUCTURE BOX ── */
+    .structure-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem 1.4rem;
+      margin: 1.2rem 0;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .structure-svg-wrap {
+      flex-shrink: 0;
+    }
+
+    .structure-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .structure-desc strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ── INFOBOX ── */
+    .wiki-infobox {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      position: sticky;
+      top: 68px;
+      box-shadow: 0 2px 16px rgba(26,58,92,0.07);
+    }
+
+    .infobox-header {
+      background: var(--blue-dark);
+      color: #fff;
+      padding: 0.7rem 1.1rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .infobox-header::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--copper-light);
+    }
+
+    .infobox-img-wrap {
+      padding: 1rem;
+      background: linear-gradient(135deg, #e8f4fd 0%, #d0eaf8 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* SVG diagram of octahedral complex */
+    .infobox-diagram {
+      display: block;
+      width: 200px;
+      height: 160px;
+    }
+
+    .infobox-caption {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    .infobox-body {
+      padding: 0.3rem 0;
+    }
+
+    .infobox-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.55rem 1.1rem;
+      border-bottom: 1px solid rgba(60,80,100,0.07);
+      gap: 0.8rem;
+    }
+
+    .infobox-row:last-child { border-bottom: none; }
+
+    .infobox-key {
+      font-family: var(--mono);
+      font-size: 0.69rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--faint);
+      white-space: nowrap;
+    }
+
+    .infobox-value {
+      font-size: 0.88rem;
+      color: var(--text);
+      font-weight: 500;
+      text-align: right;
+    }
+
+    .infobox-value sub, .infobox-value sup {
+      font-size: 0.75em;
+    }
+
+    .charge-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--copper);
+      color: #fff;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
+
+    .color-swatch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .color-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: #4A90D9;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    /* ── FOOTNOTES / REFERENCES ── */
+    .wiki-refs {
+      margin-top: 2.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--faint);
+      letter-spacing: 0.03em;
+      line-height: 1.9;
+    }
+
+    .wiki-refs strong {
+      color: var(--muted);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .wiki-layout {
+        grid-template-columns: 1fr;
+      }
+      .wiki-infobox {
+        position: relative;
+        top: unset;
+      }
+      .wiki-page {
+        padding: 5rem 1.2rem 4rem;
+      }
+      .wiki-title { font-size: 2.1rem; }
+    }
   </style>
 </head>
 <body>
+
+<!-- TOP BAR -->
+<nav class="topbar">
+  <div class="topbar-logo">Chem<span>Wiki</span></div>
+  <div class="topbar-divider"></div>
+  <ul class="topbar-tabs">
+    <li class="active"><a href="#">Bài viết</a></li>
+    <li><a href="#">Thảo luận</a></li>
+    <li><a href="#">Lịch sử</a></li>
+    <li><a href="#">Tham khảo</a></li>
+  </ul>
+</nav>
+
+<!-- MAIN PAGE -->
 <section class="wiki-page">
 
   <div class="wiki-header">
-    <h1 class="wiki-title">The Starry Night</h1>
-    <p class="wiki-subtitle">Tác phẩm hội họa nổi tiếng của Vincent van Gogh (1889)</p>
+    <div class="formula-badge">
+      <span class="dot"></span>
+      Ion phức · Phức chất vô cơ · Hóa học phối trí
+    </div>
+    <h1 class="wiki-title">Hexaaquacopper(II)<br><small style="font-size:0.55em;font-style:italic;color:var(--muted)">[Cu(H<sub>2</sub>O)<sub>6</sub>]<sup>2+</sup></small></h1>
+    <p class="wiki-subtitle">Ion phức bát diện của đồng(II) với sáu phân tử nước phối trí</p>
   </div>
 
   <div class="wiki-layout">
@@ -164,85 +468,230 @@ body {
     <article class="wiki-article">
 
       <p class="wiki-lead">
-        <strong>The Starry Night</strong> là một trong những kiệt tác nổi tiếng nhất của Vincent van Gogh,
-        được sáng tác vào năm 1889. Tác phẩm được đánh giá cao nhờ màu sắc mạnh mẽ, nét cọ xoáy cuộn
-        và chiều sâu cảm xúc đặc trưng của trường phái Hậu Ấn tượng.
+        <strong>[Cu(H<sub>2</sub>O)<sub>6</sub>]<sup>2+</sup></strong> (hexaaquacopper(II)) là ion phức được tạo thành khi ion Cu<sup>2+</sup> kết hợp với sáu phân tử nước làm phối tử. Đây là dạng tồn tại chủ yếu của đồng(II) trong dung dịch nước, đặc trưng bởi <strong>màu xanh lam nhạt</strong> đặc trưng và cấu trúc bát diện (octahedral). Phức chất này đóng vai trò quan trọng trong phân tích hóa học, nông nghiệp và tổng hợp vật liệu.
       </p>
 
-      <h2 class="wiki-section-title"><strong>Lịch sử của bức tranh</strong></h2>
+      <!-- SECTION 1 -->
+      <h2 class="wiki-section-title">
+        <span class="section-num">§1</span>
+        Thông tin cơ bản
+      </h2>
+
+      <div class="structure-box">
+        <!-- Simple octahedral diagram SVG -->
+        <div class="structure-svg-wrap">
+          <svg viewBox="0 0 160 130" width="160" height="130" xmlns="http://www.w3.org/2000/svg" aria-label="Cấu trúc bát diện của [Cu(H2O)6]2+">
+            <!-- bonds -->
+            <g stroke="#4A7FB5" stroke-width="1.8" opacity="0.7">
+              <line x1="80" y1="65" x2="80" y2="20"/>
+              <line x1="80" y1="65" x2="80" y2="110"/>
+              <line x1="80" y1="65" x2="30" y2="65"/>
+              <line x1="80" y1="65" x2="130" y2="65"/>
+              <line x1="80" y1="65" x2="48" y2="38"/>
+              <line x1="80" y1="65" x2="112" y2="92"/>
+            </g>
+            <!-- center Cu -->
+            <circle cx="80" cy="65" r="12" fill="#B87333" stroke="#8B5A20" stroke-width="1.5"/>
+            <text x="80" y="69.5" text-anchor="middle" font-family="DM Mono, monospace" font-size="9" fill="white" font-weight="400">Cu²⁺</text>
+            <!-- H2O ligands -->
+            <g fill="#2E5B8A" stroke="#1A3A5C" stroke-width="1">
+              <circle cx="80" cy="14" r="9"/>
+              <circle cx="80" cy="116" r="9"/>
+              <circle cx="22" cy="65" r="9"/>
+              <circle cx="138" cy="65" r="9"/>
+              <circle cx="42" cy="31" r="9"/>
+              <circle cx="118" cy="99" r="9"/>
+            </g>
+            <g font-family="DM Mono, monospace" font-size="7" fill="white" text-anchor="middle">
+              <text x="80" y="17">H₂O</text>
+              <text x="80" y="119">H₂O</text>
+              <text x="22" y="68">H₂O</text>
+              <text x="138" y="68">H₂O</text>
+              <text x="42" y="34">H₂O</text>
+              <text x="118" y="102">H₂O</text>
+            </g>
+          </svg>
+        </div>
+        <div class="structure-desc">
+          <strong>Cấu trúc bát diện (Octahedral)</strong><br>
+          Ion Cu<sup>2+</sup> ở trung tâm được bao quanh bởi 6 phân tử H<sub>2</sub>O phối trí đối xứng theo các trục x, y, z. Liên kết phối trí được hình thành qua cặp electron tự do của nguyên tử O trong H<sub>2</sub>O.
+        </div>
+      </div>
+
       <p>
-        The Starry Night được Vincent van Gogh sáng tác vào năm 1889 khi ông đang điều trị tại viện tâm thần ở
-        Saint-Rémy-de-Provence, miền Nam nước Pháp. Đây là giai đoạn cuối đời, khi ông phải đối mặt với những
-        khủng hoảng tinh thần nghiêm trọng nhưng vẫn không ngừng sáng tác. Bức tranh được lấy cảm hứng từ khung
-        cảnh bên ngoài cửa sổ phòng bệnh, kết hợp giữa quan sát thực tế và trí tưởng tượng. Dù từng bị chính tác
-        giả xem là chưa hoàn hảo, tác phẩm sau này lại trở thành một trong những kiệt tác quan trọng nhất của
-        lịch sử nghệ thuật.
+        Nguyên tử trung tâm là <strong>Cu<sup>2+</sup></strong> với cấu hình electron [Ar]3d<sup>9</sup>, mang điện tích 2+. Sáu phối tử <strong>H<sub>2</sub>O</strong> — các phân tử nước trung tính đơn càng — tạo liên kết cho-nhận với orbital trống của ion đồng, hình thành cấu trúc bát diện đều với số phối trí bằng 6. Phức chất mang điện tích tổng <strong>2+</strong>.
       </p>
 
-      <h2 class="wiki-section-title">Những yếu tố, chi tiết tạo nên sức hút</h2>
+      <!-- SECTION 2 -->
+      <h2 class="wiki-section-title">
+        <span class="section-num">§2</span>
+        Tính chất đặc trưng
+      </h2>
+
       <p>
-        Bức tranh gây ấn tượng mạnh với bầu trời đêm đầy những vòng xoáy chuyển động, thể hiện cảm xúc hỗn loạn
-        của họa sĩ. Các ngôi sao và mặt trăng được vẽ bằng sắc vàng rực rỡ nổi bật trên nền xanh thẫm, tạo nên
-        hiệu ứng ánh sáng cuốn hút. Hình ảnh cây hoàng đàn cao vút ở tiền cảnh là chi tiết được thêm vào mang tính
-        biểu tượng, như linh hồn cô đơn nhưng luôn vươn lên.
+        Màu xanh lam nhạt đặc trưng của [Cu(H<sub>2</sub>O)<sub>6</sub>]<sup>2+</sup> xuất phát từ hiện tượng <em>d–d transition</em>: các electron 3d của Cu<sup>2+</sup> bị tách mức năng lượng bởi trường phối tử (crystal field splitting), hấp thụ ánh sáng vùng đỏ–cam (~800 nm) và phản xạ lại màu xanh lam. Đây là cơ sở của phép nhận biết ion Cu<sup>2+</sup> bằng mắt thường.
       </p>
 
       <p>
-        Ngoài ra, bố cục còn có một ngôi làng yên bình bên dưới, tạo sự tương phản với bầu trời dữ dội, cùng những
-        yếu tố có thể liên quan đến tôn giáo, khoa học hoặc trí tưởng tượng, khiến tác phẩm càng trở nên bí ẩn.
+        Trong thực tế, phức chất này có sự biến dạng Jahn–Teller nhẹ: bốn phân tử H<sub>2</sub>O trong mặt phẳng xích đạo liên kết ngắn hơn so với hai phân tử ở vị trí trục, khiến hình học thực tế là bát diện kéo dài (elongated octahedron) thay vì đối xứng hoàn toàn.
       </p>
 
-      <h2 class="wiki-section-title">Ý nghĩa và thông điệp</h2>
+      <!-- SECTION 3 -->
+      <h2 class="wiki-section-title">
+        <span class="section-num">§3</span>
+        Ứng dụng thực tiễn
+      </h2>
+
+      <table class="app-table">
+        <thead>
+          <tr>
+            <th>Lĩnh vực</th>
+            <th>Ứng dụng cụ thể</th>
+            <th>Loại</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nhận biết ion Cu²⁺</td>
+            <td>Màu xanh lam nhạt đặc trưng là dấu hiệu định tính để nhận diện sự có mặt của muối copper(II) tan trong dung dịch nước</td>
+            <td><span class="tag-pill tag-analytical">Phân tích</span></td>
+          </tr>
+          <tr>
+            <td>Nước Schweizer</td>
+            <td>Tiền chất để điều chế nước Schweizer [Cu(NH<sub>3</sub>)<sub>4</sub>(H<sub>2</sub>O)<sub>2</sub>]<sup>2+</sup>, dung môi đặc biệt dùng trong công nghiệp tái chế giấy và sợi cellulose</td>
+            <td><span class="tag-pill tag-industrial">Công nghiệp</span></td>
+          </tr>
+          <tr>
+            <td>Nông nghiệp</td>
+            <td>Nguồn đồng trong thuốc diệt nấm, diệt tảo; cung cấp vi lượng đồng cần thiết cho cây trồng và vật nuôi</td>
+            <td><span class="tag-pill tag-agri">Nông nghiệp</span></td>
+          </tr>
+          <tr>
+            <td>Tổng hợp hóa chất</td>
+            <td>Chất trung gian sản xuất CuO, CuCO<sub>3</sub>, và các phức chất đồng dùng làm xúc tác trong tổng hợp hữu cơ</td>
+            <td><span class="tag-pill tag-synth">Tổng hợp</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- SECTION 4 -->
+      <h2 class="wiki-section-title">
+        <span class="section-num">§4</span>
+        Phản ứng thay thế phối tử
+      </h2>
+
       <p>
-        Thông qua The Starry Night, Van Gogh không chỉ tái hiện cảnh đêm mà còn thể hiện sâu sắc nội tâm đầy giằng xé
-        của mình. Những vòng xoáy, màu sắc và ánh sáng phản ánh sự bất ổn, cô đơn nhưng đồng thời cũng chứa đựng niềm hy vọng.
+        [Cu(H<sub>2</sub>O)<sub>6</sub>]<sup>2+</sup> dễ dàng tham gia phản ứng thay thế phối tử (ligand substitution) do nước là phối tử yếu. Khi cho dung dịch amoniac vào, các phân tử NH<sub>3</sub> thay thế H<sub>2</sub>O tạo phức tetraamine <strong>[Cu(NH<sub>3</sub>)<sub>4</sub>]<sup>2+</sup></strong> màu xanh lam đậm (xanh indigo) — phản ứng đặc trưng nhận biết Cu<sup>2+</sup> trong phân tích định tính.
       </p>
 
       <p>
-        Các vì sao lấp lánh trên bầu trời như biểu tượng cho niềm tin và sự an ủi mà ông tìm thấy trong thiên nhiên.
-        Vì vậy, bức tranh được xem là thông điệp về việc dù trong đau khổ, con người vẫn có thể hướng tới ánh sáng và hy vọng.
+        Tương tự, khi có mặt ion Cl<sup>−</sup> nồng độ cao, phức chất chuyển sang <strong>[CuCl<sub>4</sub>]<sup>2−</sup></strong> màu vàng–xanh lá, là minh chứng rõ ràng cho sự cạnh tranh phối tử phụ thuộc vào nồng độ và hằng số tạo phức.
       </p>
+
+      <div class="wiki-refs">
+        <strong>Tham khảo</strong>
+        Atkins, P. W.; Overton, T. L. (2010). <em>Shriver & Atkins' Inorganic Chemistry</em>, 5th ed. · Greenwood, N. N.; Earnshaw, A. (1997). <em>Chemistry of the Elements</em>, 2nd ed. · Jahn, H. A.; Teller, E. (1937). Proc. R. Soc. London A. 161, 220–235.
+      </div>
 
     </article>
 
     <!-- INFOBOX -->
     <aside class="wiki-infobox">
 
-      <img class="infobox-img"
-        src="https://cdn.kienthuc.net.vn/images/7d695db680e24205411e0a1949421921dd6e26fbb4a7188a341ba6aa9f4d9b7b72f3093d7ce9bce77d04fa79270d0bff2fbe33c886cb8df8ef8e6866a939b5103be7d7ebb54509042e529e8c6e049a506cb65b43186ad82ba5f25511c12c073c4dd67fc2bebe66a084824adce365d744/chiem-nguong-15-buc-tranh-noi-tieng-nhat-cua-danh-hoa-vincent-van-gogh.jpg.avif"
-        alt="The Starry Night">
+      <div class="infobox-header">Thông số phức chất</div>
 
-      <div class="infobox-caption">The Starry Night (1889)</div>
+      <div class="infobox-img-wrap">
+        <!-- Larger decorative octahedral SVG -->
+        <svg class="infobox-diagram" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+          <!-- glow effect -->
+          <defs>
+            <radialGradient id="bg-glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#B8D8F0" stop-opacity="0.7"/>
+              <stop offset="100%" stop-color="#D6E8F5" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="shadow">
+              <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#1A3A5C" flood-opacity="0.25"/>
+            </filter>
+          </defs>
+          <ellipse cx="100" cy="80" rx="70" ry="55" fill="url(#bg-glow)"/>
+          <!-- bonds -->
+          <g stroke="#4A7FB5" stroke-width="2" opacity="0.65">
+            <line x1="100" y1="80" x2="100" y2="24"/>
+            <line x1="100" y1="80" x2="100" y2="136"/>
+            <line x1="100" y1="80" x2="38" y2="80"/>
+            <line x1="100" y1="80" x2="162" y2="80"/>
+            <line x1="100" y1="80" x2="60" y2="46"/>
+            <line x1="100" y1="80" x2="140" y2="114"/>
+          </g>
+          <!-- ligand circles -->
+          <g filter="url(#shadow)">
+            <circle cx="100" cy="18" r="11" fill="#2E5B8A" stroke="#1A3A5C" stroke-width="1.2"/>
+            <circle cx="100" cy="142" r="11" fill="#2E5B8A" stroke="#1A3A5C" stroke-width="1.2"/>
+            <circle cx="30" cy="80" r="11" fill="#2E5B8A" stroke="#1A3A5C" stroke-width="1.2"/>
+            <circle cx="170" cy="80" r="11" fill="#2E5B8A" stroke="#1A3A5C" stroke-width="1.2"/>
+            <circle cx="52" cy="38" r="11" fill="#2E5B8A" stroke="#1A3A5C" stroke-width="1.2"/>
+            <circle cx="148" cy="122" r="11" fill="#2E5B8A" stroke="#1A3A5C" stroke-width="1.2"/>
+          </g>
+          <g font-family="DM Mono, monospace" font-size="7.5" fill="white" text-anchor="middle">
+            <text x="100" y="21">H₂O</text>
+            <text x="100" y="145">H₂O</text>
+            <text x="30" y="83">H₂O</text>
+            <text x="170" y="83">H₂O</text>
+            <text x="52" y="41">H₂O</text>
+            <text x="148" y="125">H₂O</text>
+          </g>
+          <!-- center atom -->
+          <circle cx="100" cy="80" r="15" fill="#B87333" stroke="#7A4A1A" stroke-width="1.8" filter="url(#shadow)"/>
+          <text x="100" y="84" text-anchor="middle" font-family="DM Mono, monospace" font-size="8.5" fill="white">Cu²⁺</text>
+        </svg>
+        <div class="infobox-caption">Cấu trúc bát diện của [Cu(H₂O)₆]²⁺<br>màu xanh lam nhạt trong dung dịch nước</div>
+      </div>
 
-      <div class="infobox-table">
+      <div class="infobox-body">
         <div class="infobox-row">
-          <span class="infobox-key">Họa sĩ</span>
-          <span class="infobox-value">Vincent van Gogh</span>
+          <span class="infobox-key">Tên IUPAC</span>
+          <span class="infobox-value">Hexaaquacopper(II)</span>
         </div>
-
         <div class="infobox-row">
-          <span class="infobox-key">Năm</span>
-          <span class="infobox-value">1889</span>
+          <span class="infobox-key">Công thức</span>
+          <span class="infobox-value">[Cu(H<sub>2</sub>O)<sub>6</sub>]<sup>2+</sup></span>
         </div>
-
         <div class="infobox-row">
-          <span class="infobox-key">Chất liệu</span>
-          <span class="infobox-value">Sơn dầu trên vải</span>
+          <span class="infobox-key">Điện tích</span>
+          <span class="infobox-value"><span class="charge-badge">2+</span></span>
         </div>
-
         <div class="infobox-row">
-          <span class="infobox-key">Kích thước</span>
-          <span class="infobox-value">73.7 cm × 92.1 cm</span>
+          <span class="infobox-key">T.T. trung tâm</span>
+          <span class="infobox-value">Cu<sup>2+</sup> · [Ar]3d<sup>9</sup></span>
         </div>
-
         <div class="infobox-row">
-          <span class="infobox-key">Trường phái</span>
-          <span class="infobox-value">Hậu Ấn tượng</span>
+          <span class="infobox-key">Phối tử</span>
+          <span class="infobox-value">H<sub>2</sub>O (đơn càng)</span>
         </div>
-
         <div class="infobox-row">
-          <span class="infobox-key">Địa điểm</span>
-          <span class="infobox-value">MoMA, New York</span>
+          <span class="infobox-key">Số phối trí</span>
+          <span class="infobox-value">6</span>
+        </div>
+        <div class="infobox-row">
+          <span class="infobox-key">Hình học</span>
+          <span class="infobox-value">Bát diện (O<sub>h</sub>)</span>
+        </div>
+        <div class="infobox-row">
+          <span class="infobox-key">Màu sắc</span>
+          <span class="infobox-value">
+            <span class="color-swatch">
+              <span class="color-dot"></span>
+              Xanh lam nhạt
+            </span>
+          </span>
+        </div>
+        <div class="infobox-row">
+          <span class="infobox-key">Hấp thụ</span>
+          <span class="infobox-value">~800 nm (d–d)</span>
+        </div>
+        <div class="infobox-row">
+          <span class="infobox-key">Phân loại</span>
+          <span class="infobox-value">Ion phức · Phức aqua</span>
         </div>
       </div>
 
@@ -250,5 +699,6 @@ body {
 
   </div>
 </section>
+
 </body>
 </html>
