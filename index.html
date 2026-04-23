@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumière — Online Art Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+  --cream: #F9F5EF;
+  --parchment: #F0E9DC;
+  --gold: #C9A96E;
+  --gold-light: #E8D5B0;
+  --gold-dark: #8B6F3E;
+  --charcoal: #2A2520;
+  --warm-gray: #6B635A;
+  --soft-gray: #9E9590;
+  --white: #FEFCF9;
+}
+
+body {
+  margin: 0;
+  font-family: 'Jost', sans-serif;
+  background: var(--cream);
+  color: var(--charcoal);
+}
+    .wiki-page {
+  padding: 7rem 5rem 5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.wiki-header {
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(42, 37, 32, 0.15);
+  padding-bottom: 1.5rem;
+}
+
+.wiki-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.wiki-subtitle {
+  font-size: 1rem;
+  color: var(--warm-gray);
+  margin-top: 0.6rem;
+}
+
+.wiki-layout {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.wiki-lead {
+  font-size: 1.05rem;
+  color: var(--warm-gray);
+  line-height: 1.9;
+  margin-bottom: 2rem;
+}
+
+.wiki-article p {
+  font-size: 1rem;
+  color: var(--charcoal);
+  line-height: 1.9;
+  margin-bottom: 1.3rem;
+}
+
+.wiki-section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.9rem;
+  font-weight: 500;
+  margin-top: 2.2rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(42, 37, 32, 0.12);
+  padding-bottom: 0.5rem;
+}
+
+.wiki-infobox {
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(42, 37, 32, 0.12);
+  padding: 1.2rem;
+  border-radius: 8px;
+  position: sticky;
+  top: 120px;
+}
+
+.infobox-img {
+  width: 100%;
+  border-radius: 6px;
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+.infobox-caption {
+  font-size: 0.85rem;
+  color: var(--warm-gray);
+  text-align: center;
+  margin-bottom: 1.2rem;
+  font-style: italic;
+}
+
+.infobox-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.infobox-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(42, 37, 32, 0.08);
+  padding-bottom: 0.7rem;
+}
+
+.infobox-key {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--soft-gray);
+  min-width: 110px;
+}
+
+.infobox-value {
+  font-size: 0.95rem;
+  color: var(--charcoal);
+  text-align: right;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .wiki-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .wiki-infobox {
+    position: relative;
+    top: unset;
+  }
+
+  .wiki-page {
+    padding: 7rem 2rem 4rem;
+  }
+}
+  </style>
+</head>
+<body>
+<section class="wiki-page">
+
+  <div class="wiki-header">
+    <h1 class="wiki-title">The Starry Night</h1>
+    <p class="wiki-subtitle">Tác phẩm hội họa nổi tiếng của Vincent van Gogh (1889)</p>
+  </div>
+
+  <div class="wiki-layout">
+
+    <!-- MAIN CONTENT -->
+    <article class="wiki-article">
+
+      <p class="wiki-lead">
+        <strong>The Starry Night</strong> là một trong những kiệt tác nổi tiếng nhất của Vincent van Gogh,
+        được sáng tác vào năm 1889. Tác phẩm được đánh giá cao nhờ màu sắc mạnh mẽ, nét cọ xoáy cuộn
+        và chiều sâu cảm xúc đặc trưng của trường phái Hậu Ấn tượng.
+      </p>
+
+      <h2 class="wiki-section-title"><strong>Lịch sử của bức tranh</strong></h2>
+      <p>
+        The Starry Night được Vincent van Gogh sáng tác vào năm 1889 khi ông đang điều trị tại viện tâm thần ở
+        Saint-Rémy-de-Provence, miền Nam nước Pháp. Đây là giai đoạn cuối đời, khi ông phải đối mặt với những
+        khủng hoảng tinh thần nghiêm trọng nhưng vẫn không ngừng sáng tác. Bức tranh được lấy cảm hứng từ khung
+        cảnh bên ngoài cửa sổ phòng bệnh, kết hợp giữa quan sát thực tế và trí tưởng tượng. Dù từng bị chính tác
+        giả xem là chưa hoàn hảo, tác phẩm sau này lại trở thành một trong những kiệt tác quan trọng nhất của
+        lịch sử nghệ thuật.
+      </p>
+
+      <h2 class="wiki-section-title">Những yếu tố, chi tiết tạo nên sức hút</h2>
+      <p>
+        Bức tranh gây ấn tượng mạnh với bầu trời đêm đầy những vòng xoáy chuyển động, thể hiện cảm xúc hỗn loạn
+        của họa sĩ. Các ngôi sao và mặt trăng được vẽ bằng sắc vàng rực rỡ nổi bật trên nền xanh thẫm, tạo nên
+        hiệu ứng ánh sáng cuốn hút. Hình ảnh cây hoàng đàn cao vút ở tiền cảnh là chi tiết được thêm vào mang tính
+        biểu tượng, như linh hồn cô đơn nhưng luôn vươn lên.
+      </p>
+
+      <p>
+        Ngoài ra, bố cục còn có một ngôi làng yên bình bên dưới, tạo sự tương phản với bầu trời dữ dội, cùng những
+        yếu tố có thể liên quan đến tôn giáo, khoa học hoặc trí tưởng tượng, khiến tác phẩm càng trở nên bí ẩn.
+      </p>
+
+      <h2 class="wiki-section-title">Ý nghĩa và thông điệp</h2>
+      <p>
+        Thông qua The Starry Night, Van Gogh không chỉ tái hiện cảnh đêm mà còn thể hiện sâu sắc nội tâm đầy giằng xé
+        của mình. Những vòng xoáy, màu sắc và ánh sáng phản ánh sự bất ổn, cô đơn nhưng đồng thời cũng chứa đựng niềm hy vọng.
+      </p>
+
+      <p>
+        Các vì sao lấp lánh trên bầu trời như biểu tượng cho niềm tin và sự an ủi mà ông tìm thấy trong thiên nhiên.
+        Vì vậy, bức tranh được xem là thông điệp về việc dù trong đau khổ, con người vẫn có thể hướng tới ánh sáng và hy vọng.
+      </p>
+
+    </article>
+
+    <!-- INFOBOX -->
+    <aside class="wiki-infobox">
+
+      <img class="infobox-img"
+        src="https://cdn.kienthuc.net.vn/images/7d695db680e24205411e0a1949421921dd6e26fbb4a7188a341ba6aa9f4d9b7b72f3093d7ce9bce77d04fa79270d0bff2fbe33c886cb8df8ef8e6866a939b5103be7d7ebb54509042e529e8c6e049a506cb65b43186ad82ba5f25511c12c073c4dd67fc2bebe66a084824adce365d744/chiem-nguong-15-buc-tranh-noi-tieng-nhat-cua-danh-hoa-vincent-van-gogh.jpg.avif"
+        alt="The Starry Night">
+
+      <div class="infobox-caption">The Starry Night (1889)</div>
+
+      <div class="infobox-table">
+        <div class="infobox-row">
+          <span class="infobox-key">Họa sĩ</span>
+          <span class="infobox-value">Vincent van Gogh</span>
+        </div>
+
+        <div class="infobox-row">
+          <span class="infobox-key">Năm</span>
+          <span class="infobox-value">1889</span>
+        </div>
+
+        <div class="infobox-row">
+          <span class="infobox-key">Chất liệu</span>
+          <span class="infobox-value">Sơn dầu trên vải</span>
+        </div>
+
+        <div class="infobox-row">
+          <span class="infobox-key">Kích thước</span>
+          <span class="infobox-value">73.7 cm × 92.1 cm</span>
+        </div>
+
+        <div class="infobox-row">
+          <span class="infobox-key">Trường phái</span>
+          <span class="infobox-value">Hậu Ấn tượng</span>
+        </div>
+
+        <div class="infobox-row">
+          <span class="infobox-key">Địa điểm</span>
+          <span class="infobox-value">MoMA, New York</span>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+</section>
+</body>
+</html>
